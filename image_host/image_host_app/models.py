@@ -35,7 +35,7 @@ class Post(models.Model):
         prev_post = Post.objects.filter(id__lt=self.id).order_by('-id')
         if prev_post:
             return prev_post.first()
-
+        return False
 
 
 class Comment(models.Model):
