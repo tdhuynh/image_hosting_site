@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row">
+  <div class="col-md-8">
+
+    <div class="thumbnail">
+      <a href="{% url 'post_detail_view' post.id %}">
+        <img src="{{ post.image_url }}" alt="Picture of {{ post.title }}"/>
+      </a>
+      <div class="caption">
+         <h3>{{ post.title }}</h3>
+         <p>{{ post.description }}</p>
+         <h5>Uploaded By: {{ post.user }}</h5>
+         <p>{{ post.created }}</p>
+      </div>
+    </div>
+  <hr>
+{% for comment in object.all_comments %}
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{ comment.text }}
+    </div>
+
+    <div class="panel-footer">
+      <b>Created By:</b> {{ comment.user }}
+      <b>On:</b> {{ comment.created_on }}
+      {% if comment.user == request.user %}
+        <a href="{% url 'comment_update_view' comment.id %}">Edit Comment</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% endfor %}
+  </div>
+  <div class="col-md-4">
+    <div class="row">
+      {% if object.user == request.user %}
+      <a href="{% url 'post_update_view' post.id %}" role="button" class="btn btn-default">Update Post</a>
+      {% endif %}
+    </div>
+    <br>
+    <div class="row">
+      <a href="{% url 'comment_create_view' object.id %}" role="button" class="btn btn-default">Add Comment</a>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock %}

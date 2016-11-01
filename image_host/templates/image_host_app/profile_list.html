@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-1">
+    <a href="{% url 'post_create_view' %}">
+      <button type="button" class="btn btn-default navbar-btn">
+      New Image
+    </button>
+    </a>
+  </div>
+</div>
+
+
+<div class="row">
+  {% for post in request.user.profile.user_posts %}
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <a href="{% url 'post_detail_view' post.id %}">
+        <img src="{{ post.image_url }}" alt="Picture of {{ post.title }}"/>
+      </a>
+      <div class="caption">
+         <h3>{{ post.title }}</h3>
+         <p>{{ post.description }}</p>
+         <h5>Uploaded By: {{ post.user }}</h5>
+         <p>{{ post.created }}</p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

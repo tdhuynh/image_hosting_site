@@ -1,3 +1,4 @@
 from django.contrib import admin
+from image_host_app.models import Post, Comment, Profile
 
-# Register your models here.
+admin.site.register([Post, Comment, Profile])

@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IMMAJ</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default navbar-inverse">
+    <div class="container-fluid">
+      <div class="nav navbar-nav">
+        <li><a href="{% url 'user_create_view' %}">Create User</a></li>
+        <li><a href="{% url 'post_list_view' %}">All Images</a></li>
+            {% if not request.user.is_authenticated %}
+              <li><a href="{% url 'login' %}">Login</a></li>
+              {% else %}
+              <li><a href="{% url 'profile_list_view' %}">My Images</a></li>              <li><a href="{% url 'logout' %}?next={% url 'post_list_view' %}">Logout</a></li>
+              <p class="navbar-text navbar-right">Hello, <b>{{ request.user }}</b></p>
+          {% endif %}
+      </div>
+    </div>
+    </nav>
+    <div class="container">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+  </body>
+</html
