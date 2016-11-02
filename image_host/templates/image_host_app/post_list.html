@@ -5,31 +5,30 @@
 
 
 <div class="pagination">
+  <div class="row">
+    <nav class="navbar navbar-fixed">
+      <ul class="pager">
+      {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+      {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      {% endif %}
+      </ul>
+    </nav>
+    </div>
+
 
 <div class="row">
   {% for post in object_list %}
     <div class="col-md-4">
-      <div class="thumbnail">
+      <div id="post_list" class="thumbnail">
         <a href="{% url 'post_detail_view' post.id %}">
           <img src="{{ post.image_url }}" alt="Picture of {{ post.title }}"/>
         </a>
       </div>
     </div>
   {% endfor %}
-
-
-  <nav class="navbar-fixed-bottom">
-    <ul class="pager">
-    {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-    {% endif %}
-    {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
-    {% endif %}
-    </ul>
-  </nav>
-  </div>
-
 </div>
 
 {% endblock %}

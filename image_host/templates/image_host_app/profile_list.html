@@ -15,15 +15,13 @@
 <div class="row">
   {% for post in request.user.profile.user_posts %}
   <div class="col-md-4">
-    <div class="thumbnail">
+    <div id="prof_view" class="thumbnail">
       <a href="{% url 'post_detail_view' post.id %}">
         <img src="{{ post.image_url }}" alt="Picture of {{ post.title }}"/>
       </a>
       <div class="caption">
          <h3>{{ post.title }}</h3>
          <p>{{ post.description }}</p>
-         <h5>Uploaded By: {{ post.user }}</h5>
-         <p>{{ post.created }}</p>
       </div>
     </div>
   </div>

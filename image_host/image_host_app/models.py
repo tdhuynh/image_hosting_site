@@ -23,20 +23,19 @@ class Post(models.Model):
             return self.image.url
         return "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
 
-    # I am still working on this code to get the next and previous pages to show
-    # @property
-    # def get_next_post(self):
-    #     next_post = Post.objects.filter(id__gt=self.id)
-    #     if next_post:
-    #         return next_post.first()
-    #     return False
-    #
-    # @property
-    # def get_previous_post(self):
-    #     prev_post = Post.objects.filter(id__lt=self.id).order_by('-id')
-    #     if prev_post:
-    #         return prev_post.first()
-    #     return False
+    @property
+    def get_previous_post(self):
+        previous_post = Post.objects.filter(id__gt=self.id).order_by('id').first()
+        if previous_post:
+            return previous_post
+        return False
+
+    @property
+    def get_next_post(self):
+        next_post = Post.objects.filter(id__lt=self.id).order_by('-id').first()
+        if next_post:
+            return next_post
+        return False
 
 
 class Comment(models.Model):

@@ -23,7 +23,7 @@ class ProfileListView(ListView):
 
 class PostListView(ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 9
 
 class PostCreateView(CreateView):
     model = Post
